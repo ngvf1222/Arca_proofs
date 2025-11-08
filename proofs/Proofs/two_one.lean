@@ -1,4 +1,20 @@
 open Nat -- Nat=자연수.
+section first_exercise
+theorem butter_plus_kommy_and_plus_tig_eq_butter_and_puls_kommy_plus_tig(butter kommy tig:Nat):butter+kommy+tig=butter+(kommy+tig):=by
+induction tig -- 티그에 대해서 귀납법을 쓰자.
+case zero => -- 티그가 0일때를 먼저 보이자.
+  repeat rw [Nat.add_zero]
+  -- 버터+코미+0=버터+코미
+  -- 코미+0=코미
+
+  -- 버터+코미=버터+코미로 성립
+case succ tig hypothesis=> -- 티그일때 만족할때 티그에 다음수에서도 만족함을 보이자.
+  repeat rw [Nat.add_succ] -- 덧셈의 정의를 통해 단순화하면
+  -- ((버터+코미)+티그)의 다음수=(버터+(코미+티그))의 다음수가 됨을 보이면 된다.
+  rw [hypothesis] -- 가정에 의해 (버터+코미)+티그=버터+(코미+티그)
+  -- (버터+(코미+티그))의 다음수=(버터+(코미+티그))의 다음수로 성립한다.
+end first_exercise
+
 section second_exercise -- 2번 문제
 theorem zero_plus_butter_eq_butter(butter:Nat):0+butter=butter:=by
 induction butter
