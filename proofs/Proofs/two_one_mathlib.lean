@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 open Nat -- Nat=자연수.
 section second_exercise -- 2번 문제
 theorem zero_plus_butter_eq_butter(butter:Nat):0+butter=butter:=by
@@ -33,7 +34,6 @@ case succ kommy hypothesis => -- 코미에서 만족할때 코미의 다음수�
   -- 코미+버터의 다음수=(코미+버터)의 다음수 (덧셈의 정의에서).
   rw [hypothesis] -- 가정에 의해 버터+코미=코미+버터.
   -- 따라서 (코미+버터)의 다음수=(코미+버터)의 다음수.
-
 end second_exercise
 
 
