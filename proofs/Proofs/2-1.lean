@@ -3,7 +3,7 @@ section second_exercise -- 2번 문제
 theorem zero_plus_butter_eq_butter(butter:Nat):0+butter=butter:=by
 induction butter
 case zero => -- 버터=0일때를 먼저 보이자.
-  rw [Nat.add_zero];-- 0+0=0이다. (덧셈의 정의에서)
+  rw [Nat.add_zero]; -- 0+0=0이다. (덧셈의 정의에서)
   -- 0=0으로 만족한다.
 case succ butter hypothesis => -- 버터에서 만족할때 버터의 다음수에서도 만족함을 보이자.
   rw [← Nat.add_assoc] -- 0+(버터+1)=(0+버터)+1이다. (결합법칙, 이전 편에 증명했다.)
@@ -12,7 +12,7 @@ case succ butter hypothesis => -- 버터에서 만족할때 버터의 다음수�
 
 theorem one_plus_butter_eq_butter_plus_one(butter:Nat):1+butter=butter+1:=by
 induction butter
-case zero =>-- 버터=0일때를 먼저 보이자.
+case zero => -- 버터=0일때를 먼저 보이자.
   rw [zero_plus_butter_eq_butter,Nat.add_zero] -- 1+0=0+1=1이다. (덧셈의 정의와 zero_plus_butter_eq_butter로 부터)
   -- 1=1로 성립한다.
 case succ butter hypothesis => -- 버터에서 만족할때 버터의 다음수에서도 만족함을 보이자.
