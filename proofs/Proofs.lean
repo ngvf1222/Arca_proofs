@@ -1,2 +1,2 @@
-import Proofs.two_one
-import Proofs.two_two
+import Proofs.M1_Nat_plus
+import Proofs.M2_Nat_mul

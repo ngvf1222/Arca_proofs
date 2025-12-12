@@ -1,0 +1,111 @@
+open Nat -- Nat=자연수.
+namespace Plus
+theorem associative(butter kommy tig:Nat):butter+kommy+tig=butter+(kommy+tig):=by
+--                                          덧셈은 결합법칙이 성립한다.
+--                                          (버터+코미)+티그=버터+(코미+티그)
+
+induction tig --                            티그에 대해서 귀납법을 쓰자.
+
+case zero => --                             티그가 0이라면
+--                                          (버터+코미)+0=버터+(코미+0)을 보이면 된다.
+  repeat rw [Nat.add_zero] --               (버터+코미)+0=버터+코미이고
+  --                                        코미+0=코미이므로
+  --                                        (버터+코미)+0=버터+코미=버터+(코미+0)으로 성립한다.
+
+case succ tig hypothesis=> --               티그일때 만족할때 티그의 다음수에서도 만족함을 보이자.
+--                                          (버터+코미)+티그의 다음수=버터+(코미+티그의 다음수)을 보이면 된다.
+  repeat rw [Nat.add_succ] --               덧셈의 정의를 통해 단순화하면
+  --                                        ((버터+코미)+티그)의 다음수=(버터+(코미+티그))의 다음수를 보이는것으로 충분하다.
+  rw [hypothesis] --                        가정에 의해 (버터+코미)+티그=버터+(코미+티그)므로
+  --                                        ((버터+코미)+티그)의 다음수=(버터+(코미+티그))의 다음수가 되어 성립한다.
+
+theorem zero_plus_butter_eq_butter(butter:Nat):0+butter=butter:=by
+--                                          0은 좌항등원(left identity)이다.
+--                                          0+버터=버터
+
+induction butter --                         버터에 대해서 귀납법을 쓰자.
+
+case zero => --                             버터=0이라면
+  rw [Nat.add_zero]; --                     덧셈의 정의에 의해 버터+0=0+0=0+버터가 되어 성립한다.
+
+case succ butter hypothesis => --           버터에서 만족할때 버터의 다음수에서도 만족함을 보이자.
+  rw [← Nat.add_assoc] --                   위에서 증명한 덧셈의 결합법칙에 의해
+  --                                        0+버터의 다음수=0+(버터+1)=(0+버터)+1이다.
+  rw [hypothesis] --                        가정에 의해 0+버터=버터이다.
+  --                                        따라서 0+버터의 다음수=버터+1=버터의 다음수므로 만족한다.
+
+theorem one_plus_butter_eq_butter_plus_one(butter:Nat):1+butter=butter+1:=by
+--                                          앞에서 1을 더하든 뒤에서 1을 더하든 결국 같다.
+--                                          1+버터=버터의 다음수
+
+induction butter --                         버터에 대해서 귀납법을 쓰자
+
+case zero => --                             버터=0이라면
+  rw [--                                    1+버터=1+0=1이다.
+    zero_plus_butter_eq_butter,--           또한 버터의 다음수=1이다.
+    Nat.add_zero --                         따라서 버터의 다음수=1=1+버터가 성립한다.
+  ]
+case succ butter hypothesis => --           버터에서 만족할때 버터의 다음수에서도 만족함을 보이자.
+  rw [← Nat.add_assoc] --                   결합법칙에 의해 1+버터의 다음수=1+(버터+1)=(1+버터)+1이다.
+  rw [hypothesis] --                        가정에 의해 버터+1=1+버터이다.
+  --                                        따라서 1+버터의 다음수=(1+버터)+1=(버터+1)+1=(버터의 다음수)의 다음수가 되어 성립한다.
+
+theorem commutative (butter kommy:Nat):butter+kommy=kommy+butter:=by
+--                                          덧셈은 교환법칙이 성립한다.
+--                                          버터+코미=코미+버터
+
+induction kommy --                          이번엔 코미에 대해 귀납법을 쓰자.
+
+case zero => --                             코미=0라면
+  rw [--                                    버터+코미=버터+0=버터이고
+    Nat.add_zero,--                         이것은 0+버터==코미+버터와 같다.
+    zero_plus_butter_eq_butter--            따라서 버터+코미=코미+버터가 성립한다.
+  ]
+
+case succ kommy hypothesis => --            코미에서 만족할때 코미의 다음수에서도 만족함을 보이자.
+  rw [Nat.add_assoc] --                     결합법칙에 의해 코미의 다음수+버터=(코미+1)+버터=코미+(1+버터)이다.
+  rw [one_plus_butter_eq_butter_plus_one]-- 1+버터=버터+1므로
+  repeat rw [Nat.add_succ]--                코미+(1+버터)=코미+(버터+1)=코미+버터의 다음수인데
+  --                                        덧셈의 정의에 의해 코미+버터의 다음수=(코미+버터)의 다음수다.
+  rw [hypothesis] --                        가정에 의해 버터+코미=코미+버터므로
+  --                                        따라서 (코미+버터)의 다음수=(버터+코미)의 다음수이다.
+  --                                        마지막으로 덧셈의 성질에 의해 (버터+코미)의 다음수=버터+코미의 다음수므로
+  --                                        버터+코미의 다음수=코미의 다음수+버터가 성립한다.
+
+theorem cancellation(butter kommy tig:Nat):(butter+tig=kommy+tig)↔(butter=kommy):=by
+--                                         덧셈은 소거 가능하다.
+--                                         버터+티그=코미+티그라면 버터=코미이고 그 역도 성립한다.
+
+induction tig --                           티그에 대해서 귀납법을 쓰자.
+
+case zero => --                            티그=0이라면
+  repeat rw [Nat.add_zero] --              버터+티그=버터+0=버터, 코미+티그=코미+0=코미므로
+  --                                       자명하게 버터=버터+티그=코미+티그=코미로 성립하게 된다.
+
+case succ tig hypothesis => --             티그에서 만족하면 티그의 다음수에서도 만족함을 보이자.
+  apply Iff.intro --                       순방향(->)과 역방향(<-)을 각각 따로 보이자.
+
+  --                                       (->) 버터+티그의 다음수=코미+티그의 다음수라고 가정하자
+  repeat rw [← Nat.add_assoc]--            덧셈의 정의에 의해서 버터+티그의 다음수=(버터+티그)의 다음수이고
+  --                                       비슷하게 코미+티그의 다음수=(코미+티그)의 다음수이다.
+  rw [Nat.succ_inj] --                     자연수의 정의에 의해서 버터의 다음수=코미의 다음수면 버터=코미이다.
+  rw [hypothesis]--                        버터와 코미에 각각 버터+티그, 코미+티그를 대입하면
+  intro h--                                버터+티그=코미+티그가 된다.
+  exact h--                                가정에 의해서 버터=코미가 되므로 성립한다.
+
+  --                                       (<-) 버터=코미라고 가정하자
+  intro h--                                버터+티그의 다음수=코미+티그의 다음수므로 자명히 성립한다.
+  rw [h]
+
+theorem butter_neq_zero_imp_some_kommy_exist_succ_kommy_eq_butter(butter:Nat):¬(butter=0)→(∃kommy:Nat,kommy.succ=butter):=by
+--                                        0이 아닌 자연수는 그 자연수를 다음수로 가지는 자연수를 가진다.
+--                                        0이 아닌 자연수 버터에 대해 자연수 코미가 있어서 코미의 다음수=버터이다.
+intro __
+induction butter--                        버터에 대해 귀납법을 쓰자
+
+case zero =>--                            버터=0인 경우는 우리의 증명의 고려 대상이 아니다.
+ contradiction
+case succ butter hypothesis =>--          자연수 버터에 대해서 버터의 다음수에서는 만족함을 보이자
+ have h1:butter.succ=butter+1 := rfl--    버터의 다음수=버터의 다음수이다. (자명)
+ apply Exists.intro butter h1--           따라서 코미가 버터라는 수로 존재하므로 성립한다.
+end Plus
