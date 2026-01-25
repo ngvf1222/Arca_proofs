@@ -1,2 +1,13 @@
-# Arca_proofs
-아카라이브 '본격 교주가 버터에게 수학 가르치는 이야기' 증명 모음
+# proofs
+
+## GitHub configuration
+
+To set up your new GitHub repository, follow these steps:
+
+* Under your repository name, click **Settings**.
+* In the **Actions** section of the sidebar, click "General".
+* Check the box **Allow GitHub Actions to create and approve pull requests**.
+* Click the **Pages** section of the settings sidebar.
+* In the **Source** dropdown menu, select "GitHub Actions".
+
+After following the steps above, you can remove this section from the README file.
