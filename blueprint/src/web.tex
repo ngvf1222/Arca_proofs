@@ -1,0 +1,27 @@
+% This file makes a web version of the blueprint
+% It should include all the \usepackage needed for this version.
+% The template includes standard AMS packages.
+% It is otherwise a very minimal preamble (you should probably at least
+% add cleveref and tikz-cd).
+
+\documentclass{report}
+
+\usepackage{amssymb, amsthm, amsmath}
+\usepackage{hyperref}
+\usepackage[showmore, dep_graph]{blueprint}
+
+
+\input{macros/common}
+\input{macros/web}
+
+\home{https://ngvf1222.github.io/Arca_proofs}
+\github{https://github.com/ngvf1222/Arca_proofs}
+\dochome{https://ngvf1222.github.io/Arca_proofs/docs}
+
+\title{본격 교주가 버터에게 수학 가르치는 이야기}
+\author{ngvf1222}
+
+\begin{document}
+\maketitle
+\input{content}
+\end{document}
